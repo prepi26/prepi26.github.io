@@ -1,0 +1,10 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["AQVUW2CL2F.de.wirzwei.app"],
+        "components": [{ "/": "/j/*", "comment": "Einladungslinks von Wir zwei" }]
+      }
+    ]
+  }
+}

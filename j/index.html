@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Einladung zu Wir zwei</title>
+<meta name="description" content="Dein Schatz lädt dich zu „Wir zwei“ ein – eure gemeinsame App für zwei.">
+<meta property="og:title" content="💖 Einladung zu „Wir zwei“">
+<meta property="og:description" content="Dein Schatz möchte die App mit dir zusammen nutzen. Tipp hier, um euch zu verbinden.">
+<style>
+  :root { --pink: #FF5FA2; --purple: #C58BF2; --blue: #38C8F2; --text: #2E1F47; --muted: #6E5E85; --card: #fff; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100vh; padding: 48px 16px;
+    font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text);
+    background: linear-gradient(135deg, var(--pink), var(--purple) 50%, var(--blue));
+    display: flex; justify-content: center;
+  }
+  main { width: 100%; max-width: 420px; display: grid; gap: 20px; text-align: center; }
+  .hero { color: #fff; }
+  .hero .emoji { font-size: 44px; }
+  h1 { margin: 4px 0 0; font-size: 40px; letter-spacing: -1px; }
+  .hero p { margin: 6px 0 0; opacity: .95; }
+  .card { background: var(--card); border-radius: 24px; padding: 24px; display: grid; gap: 14px; box-shadow: 0 10px 30px rgba(46,31,71,.18); }
+  .label { font-size: 13px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .6px; }
+  .code { font-size: 38px; font-weight: 900; letter-spacing: 8px; color: var(--pink); background: #FFE4F1; border-radius: 14px; padding: 10px 0; }
+  button, .store {
+    display: block; width: 100%; border: 0; border-radius: 999px; padding: 15px 20px;
+    font: inherit; font-weight: 800; font-size: 17px; cursor: pointer; text-decoration: none;
+  }
+  .store { color: #fff; background: linear-gradient(90deg, var(--pink), var(--purple), var(--blue)); }
+  button { color: var(--text); background: #F3ECFA; }
+  button:focus-visible, .store:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+  ol { text-align: left; margin: 0; padding-left: 22px; color: var(--muted); }
+  li + li { margin-top: 6px; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<main>
+  <div class="hero">
+    <div class="emoji">🌴💖🌊</div>
+    <h1>Wir zwei</h1>
+    <p>Dein Schatz möchte die App mit dir zusammen nutzen.</p>
+  </div>
+
+  <div class="card">
+    <a class="store" href="https://apps.apple.com/app/id6820457302">App laden</a>
+    <div id="code-box" class="hidden">
+      <div class="label">Euer Code</div>
+      <div class="code" id="code"></div>
+    </div>
+    <button id="copy" class="hidden" type="button">Code kopieren</button>
+    <ol>
+      <li>Lade „Wir zwei“ aus dem App Store.</li>
+      <li>Erstelle ein Konto mit „Neu hier“.</li>
+      <li>Tippe auf „Ich habe einen Code“ und füge den Code ein.</li>
+    </ol>
+  </div>
+</main>
+<script>
+  // Der Code steht im Link: /j/?c=ABCDEF. Ist die App installiert, öffnet iOS stattdessen direkt die App.
+  var code = (new URLSearchParams(location.search).get('c') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6);
+  if (code.length === 6) {
+    document.getElementById('code').textContent = code;
+    document.getElementById('code-box').classList.remove('hidden');
+    var btn = document.getElementById('copy');
+    btn.classList.remove('hidden');
+    btn.addEventListener('click', function () {
+      var done = function () { btn.textContent = 'Kopiert ✓'; };
+      if (navigator.clipboard) navigator.clipboard.writeText(code).then(done, function () {});
+    });
+  }
+</script>
+</body>
+</html>
